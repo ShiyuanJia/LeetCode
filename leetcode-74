@@ -1,0 +1,103 @@
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int start = 0;
+        int end = matrix.length - 1;
+        int num = matrix.length * matrix[0].length;
+        int mid;
+        
+        //找到在哪一行
+    
+        List<Integer> lineMatrix = new ArrayList<Integer>();
+        
+        for (int i = 0; i < matrix.length; i++) {
+            lineMatrix.add(matrix[i][0]);
+        }
+        
+        
+        int lineStart = 0;
+        int lineEnd = lineMatrix.size() - 1;
+        int lineMid;
+        int rowNum = 0;
+        Integer[] lineArray = ArrayList.toArray(lineMatrix);
+            
+        while (lineStart + 1 < lineEnd) {
+            lineMid = lineStart + (lineEnd - lineStart) / 2;
+            
+            if (lineArray[lineMid] == target) {
+                lineEnd = lineMid;
+            } else if (lineArray[lineMid] > target) {
+                lineEnd = lineMid;
+            } else if (lineArray[lineMid] < target) {
+                lineStart = lineMid;
+            }
+        }
+        
+        if (lineArray[lineStart] > target) {
+            return false;
+        }
+        
+        if (lineArray[lineEnd] < target) {
+            return false;
+        }
+        
+        if (lineArray[lineStart] == target) {
+            rowNum = lineStart;
+        }
+        
+        if (lineArray[lineEnd] == target) {
+            rowNum = lineEnd;
+        }
+        
+        //在这一行中再进行二分找具体的位置
+        
+        List<Integer> columnMatrix = new ArrayList<Integer>();
+    
+        for (int i = 0; i < matrix[0].length; i++) {
+            columnMatrix.add(matrix[rowNum][i]);
+        }
+        
+        int columnStart = 0;
+        int columnEnd = columnMatrix.length - 1;
+        int columnMid;
+        int columnNum = 0;
+    
+        int[] columnArray = ArrayList.toArray(columnMatrix);
+        while(columnStart + 1 < coloumEnd) {
+            columnMid = columnStart + (columnEnd - columnStart) / 2;
+    
+            if (columnArray[columnMid] == target) {
+                columnEnd = columnMid;
+            }
+            
+            else if (columnArray[columnMid] > target) {
+                columnEnd = columnMid;
+            }
+            
+            else if (columnArray[columnMid] < target) {
+                columnStart = columnMid;
+            }
+                
+        }
+    
+        if(columnArray[columnStart] > target) {
+            return false;
+        }
+    
+        if (columnArray[columnEnd] < target) {
+            return false;
+        }
+        
+        if (columnArray[columnStart] == target) {
+            columnNum = columnStart;
+            return ture;
+        }
+        
+        if (columnArray[columnEnd] == target) {
+            columnNum = columnEnd;
+            return ture;
+        }
+
+        return false;
+  
+    }
+}
