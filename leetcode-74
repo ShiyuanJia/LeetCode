@@ -2,7 +2,7 @@ class Solution {
     public boolean searchMatrix(int[][] matrix, int target) {
         int start = 0;
         int end = matrix.length - 1;
-        int num = matrix.length * matrix[0].length;
+        // int num = matrix.length * matrix[0].length;
         int mid;
         
         //找到在哪一行
@@ -18,7 +18,8 @@ class Solution {
         int lineEnd = lineMatrix.size() - 1;
         int lineMid;
         int rowNum = 0;
-        Integer[] lineArray = ArrayList.toArray(lineMatrix);
+        int size = lineMatrix.size();
+        Integer[] lineArray = (Integer[])lineMatrix.toArray(new Integer[size]);
             
         while (lineStart + 1 < lineEnd) {
             lineMid = lineStart + (lineEnd - lineStart) / 2;
@@ -57,12 +58,12 @@ class Solution {
         }
         
         int columnStart = 0;
-        int columnEnd = columnMatrix.length - 1;
+        int columnEnd = columnMatrix.size() - 1;
         int columnMid;
         int columnNum = 0;
-    
-        int[] columnArray = ArrayList.toArray(columnMatrix);
-        while(columnStart + 1 < coloumEnd) {
+        int size2 = columnMatrix.size();
+        Integer[] columnArray = (Integer[])columnMatrix.toArray(new Integer[size2]);
+        while(columnStart + 1 < columnEnd) {
             columnMid = columnStart + (columnEnd - columnStart) / 2;
     
             if (columnArray[columnMid] == target) {
@@ -89,12 +90,12 @@ class Solution {
         
         if (columnArray[columnStart] == target) {
             columnNum = columnStart;
-            return ture;
+            return true;
         }
         
         if (columnArray[columnEnd] == target) {
             columnNum = columnEnd;
-            return ture;
+            return true;
         }
 
         return false;
